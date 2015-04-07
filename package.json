@@ -1,0 +1,14 @@
+{
+  "name": "simplesever",
+  "description": "Simple http server",
+  "scripts": {
+    
+  },
+  "version": "0.0.1",
+  "dependencies": {
+    "http":""
+  },
+  "engines": {
+      "node": "0.10.22"
+  }
+}
