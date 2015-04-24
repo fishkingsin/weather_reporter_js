@@ -1,9 +1,12 @@
 var util = require('util');
 var bleno = require('bleno');
+var StringDecoder = require('string_decoder').StringDecoder;
+var decoder = new StringDecoder('utf8');
+
 var weatherReporter = require('./WeatherReporter');
-function WeatherReportCharacteristic(weatherReporter) {
+function LognWeatherReportCharacteristic(weatherReporter) {
   bleno.Characteristic.call(this, {
-    uuid: '08590F7EDB05467E875772F6FAEB13D4',
+    uuid: '08590F7EDB05467E875772F6FAEB13D5',
     properties: ['notify', 'write'],
     descriptors: [
       new bleno.Descriptor({
@@ -15,28 +18,29 @@ function WeatherReportCharacteristic(weatherReporter) {
   this.weatherReporter = weatherReporter;
 }
 
-util.inherits(WeatherReportCharacteristic, bleno.Characteristic);
+util.inherits(LognWeatherReportCharacteristic, bleno.Characteristic);
 
-WeatherReportCharacteristic.prototype.onWriteRequest = function(data, offset, withoutResponse, callback) {
+LognWeatherReportCharacteristic.prototype.onWriteRequest = function(data, offset, withoutResponse, callback) {
   if (offset) {
     callback(this.RESULT_ATTR_NOT_LONG);
   }
-  else if (data.length !== 1) {
+  else if (data.length !== 0) {
     callback(this.RESULT_INVALID_ATTRIBUTE_LENGTH);
   }
   else {
-    var temperature = data.readUInt8(0);
+    var report = decoder.write(data);
+    console.log(report);
     var self = this;
-    this.weatherReporter.once('report', function(result) {
+    this.weatherReporter.once('longreport', function(report) {
       if (self.updateValueCallback) {
         var data = new Buffer(1);
         data.writeUInt8(result, 0);
         self.updateValueCallback(data);
       }
     });
-    this.weatherReporter.report(temperature);
+    this.weatherReporter.longreport(report);
     callback(this.RESULT_SUCCESS);
   }
 };
 
-module.exports = WeatherReportCharacteristic;
+module.exports = LognWeatherReportCharacteristic;

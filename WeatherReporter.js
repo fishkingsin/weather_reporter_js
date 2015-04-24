@@ -26,4 +26,17 @@ WeatherReporter.prototype.report = function(temperature) {
 };
 
 
+WeatherReporter.prototype.longreport = function(long_description) {
+  var time = 1;
+  var self = this;
+  var url = 'http://translate.google.com/translate_tts?tl=en&q=' + long_description;
+  request(url).pipe(new Lame.Decoder).pipe(new Speaker);
+
+  setTimeout(function() {
+    var result = temperature;
+    self.emit('longreport', result);
+  }, time);
+};
+
+
 module.exports.WeatherReporter = WeatherReporter;
