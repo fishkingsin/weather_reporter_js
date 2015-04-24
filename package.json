@@ -1,0 +1,21 @@
+{
+  "name": "weather_reporter",
+  "description": "wather repoter",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "scripts": {
+    
+  },
+  "version": "0.0.3",
+  "dependencies": {
+    "lame": "^1.0.2",
+    "request": "^2.55.0",
+    "speaker": "~0.2.4",
+    "bleno": ">0.1.4"
+  },
+  "engines": {
+    "node": "0.10.22"
+  }
+}
