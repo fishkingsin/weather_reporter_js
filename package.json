@@ -7,13 +7,13 @@
     "url": ""
   },
   "scripts": {
-
+    "preinstall": "bash deps.sh"
   },
   "version": "0.0.3",
   "dependencies": {
     "lame": "^1.0.2",
     "request": "^2.55.0",
-    "speaker": "~0.2.4",
+    "speaker": "",
     "feedparser":"",
     "xml2js":""
   },
