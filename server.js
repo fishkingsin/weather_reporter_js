@@ -2,13 +2,12 @@ var util = require('util');
 
 var bleno = require('bleno');
 
-
 var WeatherReporterService = require('./weather_reporter_service');
 var WeatherReporter = require('./WeatherReporter');
 var name = 'WeatherReporter';
 
 var weatherReport = new WeatherReporter.WeatherReporter();
-var weatherReporterService = new WeatherReporterService(weatherReport);
+/*var weatherReporterService = new WeatherReporterService(weatherReport);
 
 
 
@@ -35,3 +34,4 @@ bleno.on('advertisingStart', function(err) {
     ]);
   }
 });
+*/
